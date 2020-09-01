@@ -1,8 +1,8 @@
 import json
 
-def get_way():
+def get_way(room):
     
     response =  dict()
-    response['start'] = 1
+    response['room'] = room
 
     return response, 200

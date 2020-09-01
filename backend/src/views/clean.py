@@ -7,6 +7,7 @@ CORS(clean_blueprint)
 
 @clean_blueprint.route('/api/cleanStart')
 def get_way():
-    response, status = clean.get_way()
+
+    response, status = clean.get_way(request.json['room'])
 
     return response, status
