@@ -8,10 +8,23 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-export const Text = styled.div`
+export const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 100px;
-  font-size: 64px;
-  color: #fcfcfc;
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin-left: 30px;
+  }
+`;
+
+export const Text = styled.div`
+  display: flex;
+  font-size: 100px;
+  color: #84deea;
 `;
 
 export const Matriz = styled.div`
@@ -19,7 +32,7 @@ export const Matriz = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 2%;
 `;
 
 export const Box = styled.button`
@@ -34,5 +47,5 @@ export const Column = styled.button`
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  background: #fcfcfc;
+  background: #84deea;
 `;

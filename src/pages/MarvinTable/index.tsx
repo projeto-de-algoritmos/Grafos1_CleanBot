@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import { Matriz, Row, Column, Text, Container } from './styles';
+import { Matriz, Row, Column, Text, Container, Logo } from './styles';
+import logoImg from '../../assets/marvin.svg';
 
 const MarvinTable: React.FC = () => {
   const [celulas, setCelulas] = useState([
@@ -14,7 +15,11 @@ const MarvinTable: React.FC = () => {
   return (
     <>
       <Container>
-        <Text>Marvin</Text>
+        <Logo>
+          <Text>Marvin</Text>
+          <img src={logoImg} alt="Marvin" />
+        </Logo>
+
         <Matriz>
           {celulas.map((row, i) => (
             <Row key={i}>
