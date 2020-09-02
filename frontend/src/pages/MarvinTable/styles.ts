@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+// interface ContainerProps {
+//   isClean: boolean;
+// }
 
 export const Container = styled.div`
   display: flex;
@@ -35,17 +39,23 @@ export const Matriz = styled.div`
   margin-top: 2%;
 `;
 
-export const Box = styled.button`
-  display: flex;
-`;
 
 export const Row = styled.div`
   display: flex;
 `;
 
 export const Column = styled.button`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
   width: 100px;
   height: 100px;
-  border-radius: 10px;
   background: #84deea;
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
 `;
