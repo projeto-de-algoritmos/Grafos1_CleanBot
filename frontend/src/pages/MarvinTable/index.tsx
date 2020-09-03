@@ -1,29 +1,31 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
-import { Matriz, Row, Column, Text, Container, Logo } from './styles';
+import { Matriz, Row, Column, Text, Container, Logo, Line } from './styles';
 import logoImg from '../../assets/marvin.svg'
 import stainImg from '../../assets/stain.svg';
 import armchairImg from '../../assets/armchair.svg';
 import sparckleImg from '../../assets/sparkle.svg';
+import api from '../../services/api';
 
-interface Image{
-  [key:number]: string;
+interface Image {
+  [key: number]: string;
 }
 
 const board = [
-    [0, 3, 3, 3, 0],
-    [0, 3, 2, 3, 0],
-    [0, 2, 2, 3, 0],
-    [0, 0, 0, 0, 2],
-    [2, 2, 0, 0, 2],
-  ];
+  [0, 3, 3, 3, 0],
+  [0, 3, 2, 3, 0],
+  [0, 2, 2, 3, 0],
+  [0, 0, 0, 0, 2],
+  [2, 2, 0, 0, 2],
+];
 
 const images: Image = {
-  0 : stainImg,
-  1 : logoImg,
-  2 : sparckleImg,
-  3 : armchairImg
+  0: stainImg,
+  1: logoImg,
+  2: sparckleImg,
+  3: armchairImg
 }
+
 
 const MarvinTable: React.FC = () => {
   const [celulas, setCelulas] = useState(board);
@@ -43,34 +45,49 @@ const MarvinTable: React.FC = () => {
         }
       }
     }, 2000 * arr);
-  },[])
+  }, [])
 
-  const handleFloodFill = useCallback((i: number, j: number): void => {
+  const handleFloodFill = useCallback((i: number, j: number): void | Error  => {
     console.log(`row: ${i}, column:${j}`);
-    const newArray = [
-      [0, 0],
-      [1, 0],
-      [2, 0],
-      [3, 0],
-      [3, 1],
-      [3, 2],
-      [3, 3],
-      [4, 2],
-      [4, 3],
-      [0, 4],
-      [1, 4],
-      [2, 4]
-    ];
-    const newBoard = board;
 
-    for (let arr = 0; arr < newArray.length; arr += 1) {
-      task(arr, newArray, newBoard);
-    }
+    let newArray = board;
+    api.get(`api/path/${i}/${j}`).then(response => {
+      console.log(response.data['order'])
+      newArray = response.data['order'];
+
+      if(newArray === undefined){
+        alert('Ei, você não pode limpar aí')
+        return
+      }
+
+      const newBoard = board;
+
+      for (let arr = 0; arr < newArray.length; arr += 1) {
+        task(arr, newArray, newBoard);
+      }
+    },);
+
+    // const newArray = [
+    //   [0, 0],
+    //   [1, 0],
+    //   [2, 0],
+    //   [3, 0],
+    //   [3, 1],
+    //   [3, 2],
+    //   [3, 3],
+    //   [4, 2],
+    //   [4, 3],
+    //   [0, 4],
+    //   [1, 4],
+    //   [2, 4]
+    // ];
+
   }, [])
 
   return (
     <>
       <Container>
+        <Line>
         <Logo>
           <Text>Marvin</Text>
           <img src={logoImg} alt="Marvin" />
@@ -81,15 +98,16 @@ const MarvinTable: React.FC = () => {
             <Row key={i}>
               {row.map((col, j) => (
                 <Column
-                key={j}
-                onClick={() => handleFloodFill(i, j)}
+                  key={j}
+                  onClick={() => handleFloodFill(i, j)}
                 >
-                  <img src={images[col]} alt="images"/>
+                  <img src={images[col]} alt="images" />
                 </Column>
               ))}
             </Row>
           ))}
         </Matriz>
+        </Line>
       </Container>
     </>
   );

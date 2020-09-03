@@ -1,8 +1,17 @@
 import styled, { css } from 'styled-components';
 
-// interface ContainerProps {
-//   isClean: boolean;
-// }
+export const Line = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 5px solid #84deea;
+  margin-top: 70px;
+
+  padding: 0px 100px;
+  padding-bottom: 100px;
+  border-radius: 30px;
+
+
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -16,7 +25,7 @@ export const Logo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 40px;
 
   img {
     width: 100px;
@@ -55,7 +64,7 @@ export const Column = styled.button`
   background: #84deea;
 
   img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
   }
 `;
