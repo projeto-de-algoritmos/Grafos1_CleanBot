@@ -1,6 +1,6 @@
-from utils.constants import visited
 from utils.constants import room
 from utils.constants import dimension
+from utils.constants import visited
 
 
 def get_neighbours(r, c):
@@ -14,6 +14,7 @@ def get_neighbours(r, c):
 
 
 def flood_fill(r, c, dirty, cleaned):
+
     if r < 0 or r >= dimension['row']:
         return
 
@@ -34,3 +35,15 @@ def flood_fill(r, c, dirty, cleaned):
             flood_fill(move[0], move[1], dirty, cleaned)
 
     return visited
+
+
+def reset_visited():
+    global room
+    room = [
+        [0, 3, 3, 3, 0],
+        [0, 3, 2, 3, 0],
+        [0, 2, 2, 3, 0],
+        [0, 0, 0, 0, 2],
+        [2, 2, 0, 0, 2],
+    ]
+    visited.clear()
