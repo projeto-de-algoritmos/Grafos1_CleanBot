@@ -12,11 +12,11 @@ interface Image {
 }
 
 const board = [
-  [0, 3, 3, 3, 0],
-  [0, 3, 2, 3, 0],
-  [0, 2, 2, 3, 0],
-  [0, 0, 0, 0, 2],
-  [2, 2, 0, 0, 2],
+  [0, 3, 0, 3, 2, 0, 0],
+  [0, 0, 2, 2, 2, 0, 2],
+  [0, 0, 2, 3, 0, 0, 0],
+  [0, 2, 0, 0, 0, 2, 2],
+  [2, 0, 0, 3, 0, 2, 3],
 ];
 
 const images: Image = {
@@ -41,6 +41,8 @@ const MarvinTable: React.FC = () => {
       newBoard[row][column] = 1;
       setPosition([row, column]);
 
+
+      
     }, 1000 * arr);
   }, [])
 
@@ -61,6 +63,15 @@ const MarvinTable: React.FC = () => {
 
       for (let arr = 0; arr < newArray.length; arr += 1) {
         task(arr, newArray, newBoard);
+
+        setTimeout(function (): void {
+          const positionNewArray = newArray[arr];
+          const row = positionNewArray[0];
+          const column = positionNewArray[1];
+          
+          newBoard[row][column] = 2;
+          setPosition([row, column]);
+        }, 1250 * arr);
       }
     },);
 
