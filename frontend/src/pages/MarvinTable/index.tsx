@@ -35,16 +35,13 @@ const MarvinTable: React.FC = () => {
   const task = useCallback((arr: any, newArray: any, newBoard: any): void => {
     setTimeout(function (): void {
       const positionNewArray = newArray[arr];
-      // console.log(positionNewArray);
-      for (let row = 0; row < newBoard.length; row += 1) {
-        for (let col = 0; col < newBoard.length; col += 1) {
-          if (positionNewArray[0] === row && positionNewArray[1] === col) {
-            newBoard[row][col] = 1;
-            setPosition([row, col]);
-          }
-        }
-      }
-    }, 2000 * arr);
+      const row = positionNewArray[0];
+      const column = positionNewArray[1];
+      
+      newBoard[row][column] = 1;
+      setPosition([row, column]);
+
+    }, 1000 * arr);
   }, [])
 
   const handleFloodFill = useCallback((i: number, j: number): void | Error  => {
@@ -55,7 +52,7 @@ const MarvinTable: React.FC = () => {
       console.log(response.data['order'])
       newArray = response.data['order'];
 
-      if(newArray === undefined){
+      if(newArray === null){
         alert('Ei, você não pode limpar aí')
         return
       }
@@ -66,21 +63,6 @@ const MarvinTable: React.FC = () => {
         task(arr, newArray, newBoard);
       }
     },);
-
-    // const newArray = [
-    //   [0, 0],
-    //   [1, 0],
-    //   [2, 0],
-    //   [3, 0],
-    //   [3, 1],
-    //   [3, 2],
-    //   [3, 3],
-    //   [4, 2],
-    //   [4, 3],
-    //   [0, 4],
-    //   [1, 4],
-    //   [2, 4]
-    // ];
 
   }, [])
 
