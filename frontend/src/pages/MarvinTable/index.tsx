@@ -43,7 +43,7 @@ const MarvinTable: React.FC = () => {
 
 
       
-    }, 500 * arr);
+    }, 1000 * arr);
   }, [])
 
   const handleFloodFill = useCallback((i: number, j: number): void | Error  => {
@@ -73,7 +73,7 @@ const MarvinTable: React.FC = () => {
           newBoard[row][column] = 2;
           setPosition([row, column]);
         }
-      }, 9500);
+      }, 18500);
     },);
 
   }, [])
