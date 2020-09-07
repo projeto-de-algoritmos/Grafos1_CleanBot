@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY ./frontend /app
 
+RUN yarn install
+
 RUN yarn build
 
 RUN yarn global add serve
